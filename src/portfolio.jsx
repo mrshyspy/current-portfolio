@@ -17,6 +17,7 @@ const GITHUB_COLORS = {
   3: '#26a641',
   4: '#39d353',
 };
+const GITHUB_USERNAME = 'mrshyspy';
 
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState('light');
@@ -581,10 +582,6 @@ const Projects = () => {
 
 
 
-const GITHUB_USERNAME = 'mrshyspy';
-
-
-
 const GitHubActivity = () => {
   const { theme } = useTheme();
   const [weeks, setWeeks] = useState([]);
@@ -736,163 +733,6 @@ const GitHubActivity = () => {
 };
 
 
-// GitHub Activity Component
-// const GitHubActivity = () => {
-//   const { theme } = useTheme();
-//   const [contributions, setContributions] = useState([]);
-//   const [totalContributions, setTotalContributions] = useState(0);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchGitHubContributions = async () => {
-//       try {
-//         // Fetch user events from GitHub API
-//         const response = await fetch('https://api.github.com/users/mrshyspy/events/public');
-//         const events = await response.json();
-
-//         // Generate contribution grid based on actual activity
-//         const weeks = 52;
-//         const days = 7;
-//         const contributionMap = new Map();
-
-//         // Process events to count contributions per day
-//         if (Array.isArray(events)) {
-//           events.forEach(event => {
-//             const date = new Date(event.created_at);
-//             const dateKey = date.toISOString().split('T')[0];
-//             contributionMap.set(dateKey, (contributionMap.get(dateKey) || 0) + 1);
-//           });
-//         }
-
-//         // Generate grid for the last 52 weeks
-//         const today = new Date();
-//         const grid = [];
-//         let total = 0;
-
-//         for (let week = weeks - 1; week >= 0; week--) {
-//           const weekData = [];
-//           for (let day = 0; day < days; day++) {
-//             const date = new Date(today);
-//             date.setDate(date.getDate() - (week * 7 + (6 - day)));
-//             const dateKey = date.toISOString().split('T')[0];
-//             const count = contributionMap.get(dateKey) || 0;
-//             total += count;
-
-//             // Convert count to level (0-4)
-//             const level = count === 0 ? 0 : Math.min(Math.floor(count / 2) + 1, 4);
-//             weekData.push(level);
-//           }
-//           grid.push(weekData);
-//         }
-
-//         setContributions(grid);
-//         setTotalContributions(total);
-//         setLoading(false);
-//       } catch (error) {
-//         console.error('Error fetching GitHub data:', error);
-//         // Fallback to mock data
-//         const weeks = 52;
-//         const days = 7;
-//         const mockGrid = Array.from({ length: weeks }, () =>
-//           Array.from({ length: days }, () => Math.floor(Math.random() * 5))
-//         );
-//         setContributions(mockGrid);
-//         setTotalContributions(mockGrid.flat().reduce((a, b) => a + b, 0) * 10);
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchGitHubContributions();
-//   }, []);
-
-//   return (
-//     <section className="py-20 px-6 relative">
-//       <div className={`absolute inset-0 opacity-30 ${
-//         theme === 'dark' ? 'bg-zinc-900/20' : 'bg-zinc-100/30'
-//       }`} style={{
-//         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-//         backgroundSize: '200px 200px'
-//       }} />
-//       <div className="max-w-5xl mx-auto relative z-10">
-//         <ScrollReveal>
-//           <h2 className={`text-3xl font-mono font-bold mb-8 ${
-//             theme === 'dark' ? 'text-zinc-100' : 'text-zinc-900'
-//           }`}>
-//             GitHub Activity
-//           </h2>
-
-//           <div className={`p-8 rounded-xl border ${
-//             theme === 'dark' 
-//               ? 'bg-zinc-900/50 border-zinc-800' 
-//               : 'bg-white border-zinc-200'
-//           }`}>
-//             <div className="flex items-center justify-between mb-6">
-//               <p className={`font-mono text-sm ${
-//                 theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-//               }`}>
-//                 {loading ? 'Loading...' : `${totalContributions} contributions in the last year`}
-//               </p>
-//               <a
-//                 href="https://github.com/mrshyspy"
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className={`font-mono text-sm flex items-center gap-2 hover:underline ${
-//                   theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'
-//                 }`}
-//               >
-//                 <GitBranch size={16} />
-//                 @mrshyspy
-//               </a>
-//             </div>
-
-//             {loading ? (
-//               <div className={`flex items-center justify-center py-12 ${
-//                 theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
-//               }`}>
-//                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-current"></div>
-//               </div>
-//             ) : (
-//               <div className="overflow-x-auto">
-//                 <div className="inline-flex gap-1">
-//                   {contributions.map((week, i) => (
-//                     <div key={i} className="flex flex-col gap-1">
-//                       {week.map((level, j) => (
-//                         <motion.div
-//                           key={j}
-//                           className={`w-3 h-3 rounded-sm ${
-//                             level === 0
-//                               ? theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-100'
-//                               : level === 1
-//                               ? 'bg-green-900'
-//                               : level === 2
-//                               ? 'bg-green-700'
-//                               : level === 3
-//                               ? 'bg-green-500'
-//                               : 'bg-green-400'
-//                           }`}
-//                           initial={{ opacity: 0, scale: 0 }}
-//                           animate={{ opacity: 1, scale: 1 }}
-//                           transition={{ 
-//                             delay: (i * 7 + j) * 0.001,
-//                             duration: 0.15,
-//                             ease: [0.25, 0.1, 0.25, 1]
-//                           }}
-//                           whileHover={{ scale: 1.4 }}
-//                         />
-//                       ))}
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-//             )}
-//           </div>
-//         </ScrollReveal>
-//       </div>
-//     </section>
-//   );
-// };
-
-// Skills Component
 const Skills = () => {
   const { theme } = useTheme();
 
@@ -1139,7 +979,7 @@ function Portfolio() {
   );
 }
 
-// Wrap with Theme Provider
+// Wrap with the Theme Provider
 export default function App() {
   return (
     <ThemeProvider>
