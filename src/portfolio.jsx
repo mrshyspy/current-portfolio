@@ -253,8 +253,7 @@ const Hero = () => {
             <motion.div variants={fadeInUp} className="flex items-center justify-center md:justify-start gap-3 mb-3">
               <h1 className={`text-5xl md:text-6xl font-mono font-bold ${theme === 'dark' ? 'text-zinc-100' : 'text-zinc-900'
                 }`}>
-                Vedant Lavale
-              </h1>
+                Sohil Khan              </h1>
               <CheckCircle2 className="text-blue-500 flex-shrink-0" size={28} />
             </motion.div>
 
