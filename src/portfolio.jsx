@@ -262,7 +262,7 @@ const Hero = () => {
               className={`text-base font-mono mb-6 ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
                 }`}
             >
-              20 · Engineer · Developer · Builder
+              23 · Engineer · Developer · Builder
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex items-center justify-center md:justify-start gap-3 mb-8">
