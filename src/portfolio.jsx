@@ -11,11 +11,11 @@ const LEVEL_MAP = {
   FOURTH_QUARTILE: 4,
 };
 const GITHUB_COLORS = {
-  4: '#e5e7eb', // gray (no contributions)
-  3: '#0e4429',
-  2: '#006d32',
-  1: '#26a641',
-  0: '#39d353',
+  0: '#e5e7eb', // gray (no contributions)
+  4: '#0e4429',
+  3: '#006d32',
+  2: '#26a641',
+  1: '#39d353',
 };
 const GITHUB_USERNAME = 'mrshyspy';
 
